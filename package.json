@@ -1,0 +1,25 @@
+{
+  "name": "slutprojektjs",
+  "version": "0.0.1",
+  "description": "Slutprojekt i JS",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cabastias/SlutprojektJS.git"
+  },
+  "author": "Cassandra Bastias",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cabastias/SlutprojektJS/issues"
+  },
+  "homepage": "https://github.com/cabastias/SlutprojektJS#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "nedb-promises": "^4.1.1"
+  }
+}
