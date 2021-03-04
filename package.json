@@ -20,6 +20,6 @@
     "bcrypt": "^5.0.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "nedb-promises": "^4.1.1"
+    "nedb": "^1.8.0"
   }
 }
