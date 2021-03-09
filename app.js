@@ -1,4 +1,5 @@
 const express = require('express')
+const passport = require('passport')
 const jwt = require('jsonwebtoken');
 const accessTokenSecret = 'youraccesstokensecret';
 const refreshTokenSecret = 'secret';
@@ -30,8 +31,7 @@ const authenticateJWT = (req, res, next) => {
         res.sendStatus(401);
     }
 }
-
-
+    // logga in dig här / funkar 
     app.post('/login/auth', function(req, res){
         const user_input = {
             email: req.body.email,
@@ -58,13 +58,14 @@ const authenticateJWT = (req, res, next) => {
             
         });
     });
+    // registerar en användare / funkar 
     app.post('/register', function(req, res) {
         console.log(req.body);
         const newUser = {
             email: req.body.email,
             password: bcrypt.hashSync(req.body.password, salt),
             name: req.body.name,
-            role: "user"
+            role: "admin"
         }
         console.log(newUser)
         db.find({ "email": newUser.email}, function (err,docs){
@@ -75,11 +76,42 @@ const authenticateJWT = (req, res, next) => {
                 res.json({ respons: "User has been registered!" });
             }
         })
-    });  
+    });
+    // få ut böcker , denna funkar, kommer ut något
+    app.post('/register/books', function(req, res) {
+        const newAuthor= {
+            email: req.body.email,
+            password: bcrypt.hashSync(req.body.password, salt),
+            author: req.body.name,
+            title: "gröna kålen",
+            year: 2021
+        }
+        console.log(newAuthor)
+        const accessToken = jwt.sign({ newAuthor: newAuthor.email }, accessTokenSecret, { expiresIn: '20m' });
+        const refreshToken = jwt.sign({ newAuthor: newAuthor.email }, refreshTokenSecret);
+
+        db.find({ "title": newAuthor.title}, function (err,docs){
+            if(docs.length > 0){
+                res.status(400).send({ respons: "User already exists!" });
+            }else{
+                db.insert(newAuthor)
+                res.json({ respons: "User has been registered!" });
+            }
+        })
+    });
+    // only test stuff 
     app.get('/test', authenticateJWT, (req, res) => {
         res.json("Test");
     });
-    
+    // get a book authenticate with jwt/ oklar
+    app.get('/books', authenticateJWT, (req, res) => {
+        res.json("books");
+    });
+  
+// startar servern
 app.listen(8090, () => {
     console.log("Server running on port 8090")
 });
+
+// note to myself, you are awesome
+// glöm inte skriva bearer in token in postman //
