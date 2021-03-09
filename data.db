@@ -1,1 +1,16 @@
-{"email":"cassandra.bastias@hotmail.com","password":"$2b$10$ITeK50IzxItAiO70.GSyKOIdbkijDnla4tlSojkLgjo.O44HopUzG","name":"Cassandra","role":"user","_id":"KwYSXyDjM3EGsn2V"}
+{"email":"cassandra@gmail.com","password":"$2b$10$xZn7IVON9FhxmluKQ5xHYufZmLtE3Ihej//nFd5FVrYRsFYLd0BAK","title":"gröna kålen","year":2021,"_id":"1JGuFlJ8Gi1aIEw2"}
+{"email":"cassa@gmail.com","password":"$2b$10$R2p1mWQ3GMAqFfb57Gka9.IpaS9yk.xapveA7jE.nWEhecTDgd/7a","name":"Cassandra ","role":"admin","_id":"3S6yk5vVT1p6Grjm"}
+{"password":{},"role":"user","_id":"66QsKzmURlPmVccL"}
+{"password":{},"role":"user","_id":"8szUitEmRZp7Ba5G"}
+{"password":{},"role":"user","_id":"AcqKs5OrkLxMUkAx"}
+{"email":"annika@hotmail.com","password":"$2b$10$mzk72DFnLR9dsmSw73r5Pe1Fq5WFqKuqsafG3P/pwgMSqsa3wmeWi","name":"ankan","role":"admin","_id":"JsWhNDnzsSlRydUZ"}
+{"password":{},"role":"user","_id":"M6Canbu46o4FrH89"}
+{"password":{},"role":"user","_id":"NUgA4PgBjKsmoMsS"}
+{"password":{},"role":"user","_id":"PxWqTO3m611UGGKp"}
+{"password":{},"role":"user","_id":"RL6yCnYuhND9gXI6"}
+{"password":{},"role":"user","_id":"YnC71uJ0eHcux3Yt"}
+{"password":{},"role":"user","_id":"jAFIzupuBEP787Or"}
+{"email":"cassandra.bastias@hotmail.com","password":"$2b$10$1OaKj//4Kgw26OShG2iQkuvhN.elnc11.loT610LYrAyTX1Fz441K","name":"Cassandra ","role":"admin","_id":"u3IiRZ38sq2yHuUp"}
+{"password":{},"role":"user","_id":"w7lUDEz1fpZmeRCy"}
+{"email":"","password":"$2b$10$mzk72DFnLR9dsmSw73r5PeeFJGKnV8WOr4qdoC1CSKufB97HMIPJu","name":"","role":"admin","_id":"xx2y92fVg2rUYNlk"}
+{"email":"linus@odenring.se","password":"$2b$10$uVvR6u2fkC7GeEG0Ie9BYeuzsKGuKgn7oYos1OJR04TmmJpGiYzGm","name":"Linus","role":"user","_id":"z9UJZt95K2smnhnh"}

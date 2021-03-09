@@ -83,8 +83,8 @@ const authenticateJWT = (req, res, next) => {
             email: req.body.email,
             password: bcrypt.hashSync(req.body.password, salt),
             author: req.body.name,
-            title: "gröna kålen",
-            year: 2021
+            title: " ",
+            year: " "
         }
         console.log(newAuthor)
         const accessToken = jwt.sign({ newAuthor: newAuthor.email }, accessTokenSecret, { expiresIn: '20m' });
