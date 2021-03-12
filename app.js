@@ -83,8 +83,8 @@ const authenticateJWT = (req, res, next) => {
             email: req.body.email,
             password: bcrypt.hashSync(req.body.password, salt),
             author: req.body.name,
-            title: " ",
-            year: " "
+            title: "/",
+            year: "/"
         }
         console.log(newAuthor)
         const accessToken = jwt.sign({ newAuthor: newAuthor.email }, accessTokenSecret, { expiresIn: '20m' });
@@ -92,10 +92,10 @@ const authenticateJWT = (req, res, next) => {
 
         db.find({ "title": newAuthor.title}, function (err,docs){
             if(docs.length > 0){
-                res.status(400).send({ respons: "User already exists!" });
+                res.status(400).send({ respons: "Author already exists!" });
             }else{
                 db.insert(newAuthor)
-                res.json({ respons: "User has been registered!" });
+                res.json({ respons: "New Author has been registered!" });
             }
         })
     });
@@ -112,6 +112,4 @@ const authenticateJWT = (req, res, next) => {
 app.listen(8090, () => {
     console.log("Server running on port 8090")
 });
-
-// note to myself, you are awesome
 // glöm inte skriva bearer in token in postman //
