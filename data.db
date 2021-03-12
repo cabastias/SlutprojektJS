@@ -1,16 +1,9 @@
-{"email":"cassandra@gmail.com","password":"$2b$10$xZn7IVON9FhxmluKQ5xHYufZmLtE3Ihej//nFd5FVrYRsFYLd0BAK","title":"gröna kålen","year":2021,"_id":"1JGuFlJ8Gi1aIEw2"}
-{"email":"cassa@gmail.com","password":"$2b$10$R2p1mWQ3GMAqFfb57Gka9.IpaS9yk.xapveA7jE.nWEhecTDgd/7a","name":"Cassandra ","role":"admin","_id":"3S6yk5vVT1p6Grjm"}
-{"password":{},"role":"user","_id":"66QsKzmURlPmVccL"}
-{"password":{},"role":"user","_id":"8szUitEmRZp7Ba5G"}
-{"password":{},"role":"user","_id":"AcqKs5OrkLxMUkAx"}
-{"email":"annika@hotmail.com","password":"$2b$10$mzk72DFnLR9dsmSw73r5Pe1Fq5WFqKuqsafG3P/pwgMSqsa3wmeWi","name":"ankan","role":"admin","_id":"JsWhNDnzsSlRydUZ"}
-{"password":{},"role":"user","_id":"M6Canbu46o4FrH89"}
-{"password":{},"role":"user","_id":"NUgA4PgBjKsmoMsS"}
-{"password":{},"role":"user","_id":"PxWqTO3m611UGGKp"}
-{"password":{},"role":"user","_id":"RL6yCnYuhND9gXI6"}
-{"password":{},"role":"user","_id":"YnC71uJ0eHcux3Yt"}
-{"password":{},"role":"user","_id":"jAFIzupuBEP787Or"}
-{"email":"cassandra.bastias@hotmail.com","password":"$2b$10$1OaKj//4Kgw26OShG2iQkuvhN.elnc11.loT610LYrAyTX1Fz441K","name":"Cassandra ","role":"admin","_id":"u3IiRZ38sq2yHuUp"}
-{"password":{},"role":"user","_id":"w7lUDEz1fpZmeRCy"}
-{"email":"","password":"$2b$10$mzk72DFnLR9dsmSw73r5PeeFJGKnV8WOr4qdoC1CSKufB97HMIPJu","name":"","role":"admin","_id":"xx2y92fVg2rUYNlk"}
-{"email":"linus@odenring.se","password":"$2b$10$uVvR6u2fkC7GeEG0Ie9BYeuzsKGuKgn7oYos1OJR04TmmJpGiYzGm","name":"Linus","role":"user","_id":"z9UJZt95K2smnhnh"}
+{"email":"Kajsa.olsson@gmail.com","password":"$2b$10$Zu3offpPScEnp9tQq8RagespHmQsvogqdH.R04zdsOA.WL.hAqtZy","name":"Kajsa","role":"admin","_id":"PMOVB6x0ZnNIWLIx"}
+{"email":"anna.skoog@hotmail.com","password":"$2b$10$.S/gQrLFnCdJ6bYf49znlOlFxT0oMXKZksqnjHVxXTrVA9JRde7km","name":"ANNA","role":"admin","_id":"jWi88x8muT8sRKnW"}
+{"name":{"title":"Ms","first":"Ingebjørg","last":"Rishaug"},"email":"Ingebjorg.Rishaug@example.com","nat":"NO","_id":"03Dghpu8isQbE7wh"},
+{"name":{"title":"Miss","first":"Felecia","last":"Washington"},"email":"Felecia.Washington@example.com","nat":"AU","_id":"12rzU3Q67WpIECGe"},
+{"name":{"title":"Mr","first":"Marc","last":"Mendez"},"email":"Marc.Mendez@example.com","nat":"ES","_id":"1aeP51MXiTfWjh8a"},
+{"name":{"title":"Ms","first":"Candelária","last":"Santos"},"email":"Candelaria.Santos@example.com","nat":"BR","_id":"23IftmqBni7GtCts"},
+{"name":{"title":"Mrs","first":"Lumi","last":"Haataja"},"email":"Lumi.Haataja@example.com","nat":"FI","_id":"2WCFo1lddtonZsc5"},
+{"name":{"title":"Ms","first":"Vildan","last":"Candan"},"email":"Vildan.Candan@example.com","nat":"TR","_id":"2q26x4oeBx5OhKWe"},
+{"name":{"title":"Ms","first":"Maelya","last":"Martinez"},"email":"Maelya.Martinez@example.com","nat":"FR","_id":"3feQsVIwV6sPGGAD"}
