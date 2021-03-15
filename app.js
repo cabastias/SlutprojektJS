@@ -12,6 +12,7 @@ const PORT = process.env.PORT;
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 app.use(express.json());
+app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
 const authenticateJWT = (req, res, next) => {
     const authHeader = req.headers.authorization;
@@ -31,6 +32,11 @@ const authenticateJWT = (req, res, next) => {
         res.sendStatus(401);
     }
 }
+
+app.get('/', function(req, res) {
+    res.sendFile('public/index.html', { root: __dirname });
+});
+
     // logga in dig här / funkar 
     app.post('/login/auth', function(req, res){
         const user_input = {
