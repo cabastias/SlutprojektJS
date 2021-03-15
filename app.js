@@ -99,10 +99,28 @@ const authenticateJWT = (req, res, next) => {
             }
         })
     });
-    // delete books here
-    app.delete('/books', (req, res) => { 
-        res.send("DELETE Request Called") 
-      }) 
+    
+    // app delete books id
+    app.delete('/book/:id', (req, res) =>
+    Book.findOneAndRemove({
+     _id: req.params.id
+    }, (err, book) => {
+     if(err) {
+      res.send('Books remove')
+     } else {
+      console.log(book);
+      res.status(204);
+    }
+   }));
+    
+    // app patch books id
+    app.patch('/api/todos/:id', (req, res) => {
+        const todo = todos.find(todo => todo.id == req.params.id);
+        if (!todo) return res.sendStatus(404);
+        todo.completed = !todo.completed;
+        res.json(todo);
+       });
+
     // only test stuff 
     app.get('/test', authenticateJWT, (req, res) => {
         res.json("Test");
@@ -111,10 +129,7 @@ const authenticateJWT = (req, res, next) => {
     app.get('/books', authenticateJWT, (req, res) => {
         res.json("books");
     });
-    // delete book
-    app.get('/books', authenticateJWT, (req, res) => {
-        res.json(" delete books");
-    });
+
   // token here
     app.post('/token', (req, res) => {
         const { token } = req.body;
