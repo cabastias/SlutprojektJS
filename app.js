@@ -32,12 +32,11 @@ const authenticateJWT = (req, res, next) => {
         res.sendStatus(401);
     }
 }
-
 app.get('/', function(req, res) {
-    res.sendFile('public/index.html', { root: __dirname });
+    res.sendFile('views/index.ejs', { root: __dirname });
 });
 
-    // logga in dig här / funkar 
+  // logga in dig här / funkar 
     app.post('/login/auth', function(req, res){
         const user_input = {
             email: req.body.email,
@@ -83,6 +82,7 @@ app.get('/', function(req, res) {
             }
         })
     });
+      
     // få ut böcker , denna funkar, kommer ut något
     app.post('/register/books', function(req, res) {
         const newAuthor= {
@@ -135,42 +135,6 @@ app.get('/', function(req, res) {
     app.get('/books', authenticateJWT, (req, res) => {
         res.json("books");
     });
-
-  // token here
-    app.post('/token', (req, res) => {
-        const { token } = req.body;
-    
-        if (!token) {
-            return res.sendStatus(401);
-        }
-    
-        if (!refreshTokens.includes(token)) {
-            return res.sendStatus(403);
-        }
-    
-        jwt.verify(token, refreshTokenSecret, (err, user) => {
-            if (err) {
-                return res.sendStatus(403);
-            }
-    
-            const accessToken = jwt.sign({ username: user.username, role: user.role }, accessTokenSecret, { expiresIn: '20m' });
-    
-            res.json({
-                accessToken
-            });
-        });
-    });
-
-       // logout here 
-       app.post('/logout', (req, res) => {
-        const { token } = req.body;
-        refreshTokens = refreshTokens.filter(t=> t !== token);
-
-    
-        res.send("Logout successful");
-    });
- 
-
 
 // startar servern
 app.listen(8090, () => {
