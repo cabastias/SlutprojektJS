@@ -140,4 +140,3 @@ app.get('/', function(req, res) {
 app.listen(8090, () => {
     console.log("Server running on port 8090")
 });
-// glöm inte skriva bearer in token in postman //
