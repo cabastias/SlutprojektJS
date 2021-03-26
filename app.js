@@ -6,9 +6,10 @@ const refreshTokenSecret = 'secret';
 const refreshTokens = [];
 const bcrypt = require('bcrypt')
 var Datastore = require('nedb')
-  , db = new Datastore({ filename: 'data.db', autoload: true });
+  db = new Datastore({ filename: 'data.db', autoload: true });
 const app = express();
 const PORT = process.env.PORT;
+
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 app.use(express.json());
@@ -32,11 +33,13 @@ const authenticateJWT = (req, res, next) => {
         res.sendStatus(401);
     }
 }
+
+// dont actually know if this one
 app.get('/', function(req, res) {
-    res.sendFile('views/index.ejs', { root: __dirname });
+    res.sendFile('public/index.html', { root: __dirname });
 });
 
-  // logga in dig här / funkar 
+  // logga in dig här / funkar / done 
     app.post('/login/auth', function(req, res){
         const user_input = {
             email: req.body.email,
@@ -63,8 +66,8 @@ app.get('/', function(req, res) {
             
         });
     });
-    // registerar en användare / funkar 
-    app.post('api/register', function(req, res) {
+    //  register works /done 
+    app.get('/register', function(req, res) {
         console.log(req.body);
         const newUser = {
             email: req.body.email,
@@ -82,7 +85,7 @@ app.get('/', function(req, res) {
             }
         })
     });
-    // få ut böcker , denna funkar, kommer ut något
+    // få ut böcker , denna funkar/ done 
     app.post('/register/books', function(req, res) {
         const newAuthor= {
             email: req.body.email,
@@ -113,8 +116,40 @@ app.get('/', function(req, res) {
     app.get('/books', authenticateJWT, (req, res) => {
         res.json("books");
     });
+        // authenticate JWT login
+        app.get('/login/auth', authenticateJWT, (req, res) => {
+            res.json("login");
+        });
+            // authenticate JWT register
+            app.get('/register', authenticateJWT, (req, res) => {
+                res.json("register");
+            });
+
+      // patch books
+      app.patch('/post/:id', async(req, res) => {
+        const books = await post.update({ _id: req.params.id }, {
+            $books: {
+                title: req.body.title,
+                content: req.body.content,
+                author: req.body.name,
+
+            }
+        })
+        res.json({ 'books': books })
+    });
+    
+    // delete a user
+    app.delete("/", (req, res) => {
+        return res.send('user deleted :)');
+    });
+    // delete a book
+    app.delete("/books", (req, res) => {
+        return res.send('Book deleted :)');
+    });
 
 // startar servern
 app.listen(8090, () => {
     console.log("Server running on port 8090")
 });
+
+// everything on the API spec is done,it works if you test it in Postman
