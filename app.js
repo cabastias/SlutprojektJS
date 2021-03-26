@@ -34,11 +34,6 @@ const authenticateJWT = (req, res, next) => {
     }
 }
 
-// dont actually know if this one
-app.get('/', function(req, res) {
-    res.sendFile('public/index.html', { root: __dirname });
-});
-
   // logga in dig här / funkar / done 
     app.post('/login/auth', function(req, res){
         const user_input = {
@@ -112,6 +107,7 @@ app.get('/', function(req, res) {
     app.get('/test', authenticateJWT, (req, res) => {
         res.json("Test");
     });
+    /*
     // get a book authenticate with jwt/
     app.get('/books', authenticateJWT, (req, res) => {
         res.json("books");
@@ -124,8 +120,8 @@ app.get('/', function(req, res) {
             app.get('/register', authenticateJWT, (req, res) => {
                 res.json("register");
             });
-
-      // patch books
+*/
+      // patch  books
       app.patch('/post/:id', async(req, res) => {
         const books = await post.update({ _id: req.params.id }, {
             $books: {
