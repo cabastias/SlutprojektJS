@@ -1,3 +1,4 @@
+// Libraries,Passport,Accesstoken
 const express = require('express')
 const passport = require('passport')
 const jwt = require('jsonwebtoken');
@@ -6,7 +7,8 @@ const refreshTokenSecret = 'secret';
 const refreshTokens = [];
 const bcrypt = require('bcrypt')
 var Datastore = require('nedb')
-  db = new Datastore({ filename: 'data.db', autoload: true });
+  db = new Datastore({ filename: 'data.db', autoload: true }),
+  books = new Datastore({ filename: 'books.db', autoload: true });
 const app = express();
 const PORT = process.env.PORT;
 
@@ -33,8 +35,11 @@ const authenticateJWT = (req, res, next) => {
         res.sendStatus(401);
     }
 }
-
-  // logga in dig här / funkar / done 
+app.get("/",function(req,res){
+    res.sendFile(__dirname + "/index.html");
+      });
+  
+  // logga in dig här efter du gjort en användare, done 
     app.post('/login/auth', function(req, res){
         const user_input = {
             email: req.body.email,
@@ -61,7 +66,12 @@ const authenticateJWT = (req, res, next) => {
             
         });
     });
-    //  register works /done 
+    // bearer token
+    app.get('/bearer', function(req,res){
+        res.json("Bearer");
+
+    });
+    // registrerar en användare ,done 
     app.get('/register', function(req, res) {
         console.log(req.body);
         const newUser = {
@@ -80,7 +90,7 @@ const authenticateJWT = (req, res, next) => {
             }
         })
     });
-    // få ut böcker , denna funkar/ done 
+    // denna funkar/ done 
     app.post('/register/books', function(req, res) {
         const newAuthor= {
             email: req.body.email,
@@ -103,44 +113,55 @@ const authenticateJWT = (req, res, next) => {
         })
     });
 
-    // only test stuff 
+    // only test stuff ,might delete later
     app.get('/test', authenticateJWT, (req, res) => {
         res.json("Test");
     });
-    /*
-    // get a book authenticate with jwt/
-    app.get('/books', authenticateJWT, (req, res) => {
-        res.json("books");
-    });
-        // authenticate JWT login
-        app.get('/login/auth', authenticateJWT, (req, res) => {
-            res.json("login");
-        });
-            // authenticate JWT register
-            app.get('/register', authenticateJWT, (req, res) => {
-                res.json("register");
-            });
-*/
-      // patch  books
-      app.patch('/post/:id', async(req, res) => {
-        const books = await post.update({ _id: req.params.id }, {
-            $books: {
-                title: req.body.title,
-                content: req.body.content,
-                author: req.body.name,
-
-            }
-        })
-        res.json({ 'books': books })
-    });
     
     // delete a user
-    app.delete("/", (req, res) => {
-        return res.send('user deleted :)');
+    app.delete("/user", (req, res) => {
+        return res.json('user deleted :)');
     });
-    // delete a book
+
+/* Books */
+
+    app.get('/books', function(req,res){
+        books.find({}, function (err, docs) {
+            res.json(docs);
+        });
+    });
+    app.post('/books', function(req, res) {
+        const newBooks= {
+            name: req.body.name,
+            language: req.body.language,
+            title: req.body.title,
+            year: req.body.year,
+            country: req.body.country,
+            userid: req.body.userid
+        }
+        const accessToken = jwt.sign({ newBooks: newBooks.author }, accessTokenSecret, { expiresIn: '20m' });
+        const refreshToken = jwt.sign({ newBooks: newBooks.author }, refreshTokenSecret);
+
+        books.find({ "title": newBooks.title}, function (err,docs){
+            if(docs.length > 0){
+                res.status(400).send({ respons: "Book already exists!" });
+            }else{
+                books.insert(newBooks)
+                res.json({ respons: "Book has been added!" });
+            }
+        })
+    });
+
+    // Deleting a Book
     app.delete("/books", (req, res) => {
-        return res.send('Book deleted :)');
+        console.log(req.body._id);
+        books.remove({ _id: req.body._id}, {}, function (err, numRemoved) {
+            if(numRemoved > 0){
+                return res.json("Row has been deleted.");
+            }else{
+                return res.json("Nothing has been deleted.")
+            }
+        });
     });
 
 // startar servern
@@ -148,4 +169,4 @@ app.listen(8090, () => {
     console.log("Server running on port 8090")
 });
 
-// everything on the API spec is done,it works if you test it in Postman
+// good job cassandra :)
