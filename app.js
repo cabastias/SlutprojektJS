@@ -35,10 +35,11 @@ const authenticateJWT = (req, res, next) => {
         res.sendStatus(401);
     }
 }
-app.get("/",function(req,res){
-    res.sendFile(__dirname + "/index.html");
-      });
-  
+// trying to connect frontend with backend
+app.get('/', function(req, res) {
+   res.sendFile('index.html');
+});
+
   // logga in dig här efter du gjort en användare, done 
     app.post('/login/auth', function(req, res){
         const user_input = {
@@ -120,7 +121,12 @@ app.get("/",function(req,res){
     
     // delete a user
     app.delete("/user", (req, res) => {
-        return res.json('user deleted :)');
+        console.log(req.body._id);
+        user.remove({ _id: req.body._id}, {}, function (err,user) {
+            if(user > 0){
+                return res.json("user has now been deleted.");
+            }
+        });
     });
 
 /* Books */
@@ -157,7 +163,7 @@ app.get("/",function(req,res){
         console.log(req.body._id);
         books.remove({ _id: req.body._id}, {}, function (err, numRemoved) {
             if(numRemoved > 0){
-                return res.json("Row has been deleted.");
+                return res.json("Book has been deleted.");
             }else{
                 return res.json("Nothing has been deleted.")
             }
@@ -168,5 +174,3 @@ app.get("/",function(req,res){
 app.listen(8090, () => {
     console.log("Server running on port 8090")
 });
-
-// good job cassandra :)
