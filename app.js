@@ -170,6 +170,20 @@ app.get('/', function(req, res) {
         });
     });
 
+    // Patch books
+    app.patch('/books/:id', async(req, res) => {
+        const newBooks= {
+            name: req.body.name,
+            language: req.body.language,
+            title: req.body.title,
+            year: req.body.year,
+            country: req.body.country,
+            userid: req.body.userid
+        }
+    
+        const result = await books.update({ _id: req.params.id }, { $set: { "name": req.body.name, "language": req.body.language, "title": req.body.title, year: req.body.year, country: req.body.country, userid: req.body.userid } })
+        res.json({ "result": result })
+    })
 // startar servern
 app.listen(8090, () => {
     console.log("Server running on port 8090")
