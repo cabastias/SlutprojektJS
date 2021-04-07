@@ -131,12 +131,12 @@ app.get('/', function(req, res) {
 
 /* Books */
 
-    app.get('api/books', function(req,res){
+    app.get('/books', function(req,res){
         books.find({}, function (err, docs) {
             res.json(docs);
         });
     });
-    app.post('api/books', function(req, res) {
+    app.post('/books', function(req, res) {
         const newBooks= {
             name: req.body.name,
             language: req.body.language,
@@ -159,7 +159,7 @@ app.get('/', function(req, res) {
     });
 
     // Deleting a Book
-    app.delete("api/books", (req, res) => {
+    app.delete("/books", (req, res) => {
         console.log(req.body._id);
         books.remove({ _id: req.body._id}, {}, function (err, numRemoved) {
             if(numRemoved > 0){
