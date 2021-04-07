@@ -32,6 +32,7 @@ const authenticateJWT = (req, res, next) => {
         res.sendStatus(401);
     }
 }
+/*
   // logga in dig här / funkar 
     app.post('/login/auth', function(req, res){
         const user_input = {
@@ -78,47 +79,42 @@ const authenticateJWT = (req, res, next) => {
             }
         })
     });
-
-    // få ut böcker , denna funkar, kommer ut något
-    app.post('/register/books', function(req, res) {
+*/
+    // skapa nya böcker
+    app.post('/books', function(req, res) {
         const newBooks= {
-            email: req.body.email,
-            password: bcrypt.hashSync(req.body.password, salt),
-            author: req.body.name,
-            language: "/",
-            title: "/",
-            year: "/",
-            country: "/",
+            name: req.body.name,
+            language: req.body.language,
+            title: req.body.title,
+            year: req.body.year,
+            country: req.body.country,
+            userid: req.body.userid
         }
         console.log(newBooks)
-        const accessToken = jwt.sign({ newBooks: newBooks.email }, accessTokenSecret, { expiresIn: '20m' });
-        const refreshToken = jwt.sign({ newBooks: newBooks.email }, refreshTokenSecret);
+        const accessToken = jwt.sign({ newBooks: newBooks.author }, accessTokenSecret, { expiresIn: '20m' });
+        const refreshToken = jwt.sign({ newBooks: newBooks.author }, refreshTokenSecret);
 
         db.find({ "title": newBooks.title}, function (err,docs){
             if(docs.length > 0){
-                res.status(400).send({ respons: "new Books already exists!" });
+                res.status(400).send({ respons: "new Book already exists!" });
             }else{
                 db.insert(newBooks)
-                res.json({ respons: "new Books has been registered!" });
+                res.json({ respons: "new Book has been registered!" });
             }
         })
     });
 
-    // get a book authenticate with jwt/
-    app.get('/books', authenticateJWT, (req, res) => {
-        res.json("books");
-    });
-
-      // put/patch
-      app.put('/books', (req, res) => {
-        return res.send('Received a PUT HTTP method');
-      });
-
-    // delete 
+    // Deleting a Book
     app.delete("/books", (req, res) => {
-        return res.send('Book deleted :)');
+        console.log(req.body._id);
+        db.remove({ _id: req.body._id}, {}, function (err, numRemoved) {
+            if(numRemoved > 0){
+                return res.json("Book has been deleted.");
+            }else{
+                return res.json("Nothing has been deleted.")
+            }
+        });
     });
-    
 // startar servern
 app.listen(8070, () => {
     console.log("Server running on port 8070")

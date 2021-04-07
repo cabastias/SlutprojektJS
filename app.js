@@ -11,7 +11,6 @@ var Datastore = require('nedb')
   books = new Datastore({ filename: 'books.db', autoload: true });
 const app = express();
 const PORT = process.env.PORT;
-
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 app.use(express.json());
@@ -35,19 +34,13 @@ const authenticateJWT = (req, res, next) => {
         res.sendStatus(401);
     }
 }
-// trying to connect frontend with backend
-app.get('/', function(req, res) {
-   res.sendFile('index.html');
-});
-
   // logga in dig här efter du gjort en användare, done 
-    app.post('/login/auth', function(req, res){
+    app.post('/api/auth', function(req, res){
         const user_input = {
             email: req.body.email,
             password: req.body.password,
         }
         db.findOne({email: user_input.email}).exec((err, user_data) => {
-            console.log(user_data);
            if(user_data){
             bcrypt.compare(user_input.password, user_data.password).then(function(result) {
                 if(result){
@@ -67,13 +60,8 @@ app.get('/', function(req, res) {
             
         });
     });
-    // bearer token
-    app.get('/bearer', function(req,res){
-        res.json("Bearer");
-
-    });
     // registrerar en användare ,done 
-    app.get('/register', function(req, res) {
+    app.get('/api/register', function(req, res) {
         console.log(req.body);
         const newUser = {
             email: req.body.email,
@@ -81,42 +69,14 @@ app.get('/', function(req, res) {
             name: req.body.name,
             role: "admin"
         }
-        console.log(newUser)
         db.find({ "email": newUser.email}, function (err,docs){
             if(docs.length > 0){
-                res.status(400).send({ respons: "User already exists!" });
+                res.status(400).send({ response: "User already exists!" });
             }else{
                 db.insert(newUser)
-                res.json({ respons: "User has been registered!" });
+                res.json({ response: "User has been registered!" });
             }
         })
-    });
-    // denna funkar/ done 
-    app.post('/register/books', function(req, res) {
-        const newAuthor= {
-            email: req.body.email,
-            password: bcrypt.hashSync(req.body.password, salt),
-            author: req.body.name,
-            title: "/",
-            year: "/"
-        }
-        console.log(newAuthor)
-        const accessToken = jwt.sign({ newAuthor: newAuthor.email }, accessTokenSecret, { expiresIn: '20m' });
-        const refreshToken = jwt.sign({ newAuthor: newAuthor.email }, refreshTokenSecret);
-
-        db.find({ "title": newAuthor.title}, function (err,docs){
-            if(docs.length > 0){
-                res.status(400).send({ respons: "Author already exists!" });
-            }else{
-                db.insert(newAuthor)
-                res.json({ respons: "New Author has been registered!" });
-            }
-        })
-    });
-
-    // only test stuff ,might delete later
-    app.get('/test', authenticateJWT, (req, res) => {
-        res.json("Test");
     });
     
     // delete a user
@@ -131,12 +91,14 @@ app.get('/', function(req, res) {
 
 /* Books */
 
-    app.get('/books', function(req,res){
+    app.get('/api/books', function(req,res){
+        //lägg till if sats om admin visa alla annars bara användaren
         books.find({}, function (err, docs) {
             res.json(docs);
         });
     });
-    app.post('/books', function(req, res) {
+    //Skapar nya böcker
+    app.post('/api/books', function(req, res) {
         const newBooks= {
             name: req.body.name,
             language: req.body.language,
@@ -165,25 +127,12 @@ app.get('/', function(req, res) {
             if(numRemoved > 0){
                 return res.json("Book has been deleted.");
             }else{
-                return res.json("Nothing has been deleted.")
+                return res.json("Nothing has been deleted.");
             }
         });
     });
 
-    // Patch books
-    app.patch('/books/:id', async(req, res) => {
-        const newBooks= {
-            name: req.body.name,
-            language: req.body.language,
-            title: req.body.title,
-            year: req.body.year,
-            country: req.body.country,
-            userid: req.body.userid
-        }
-    
-        const result = await books.update({ _id: req.params.id }, { $set: { "name": req.body.name, "language": req.body.language, "title": req.body.title, year: req.body.year, country: req.body.country, userid: req.body.userid } })
-        res.json({ "result": result })
-    })
+
 // startar servern
 app.listen(8090, () => {
     console.log("Server running on port 8090")
