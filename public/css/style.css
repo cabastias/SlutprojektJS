@@ -1,13 +1,5 @@
 body {
-  background-color: blueviolet;
+  background-color: rgb(218, 194, 240);
   padding: 30px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-h2 {
-  margin:0 0 .5em 0;
-}
-
-a {
-  color: #00B7FF;
 }
