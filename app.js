@@ -1,4 +1,3 @@
-// Libraries,Passport,Accesstoken
 const express = require('express')
 const passport = require('passport')
 const jwt = require('jsonwebtoken');
@@ -35,7 +34,7 @@ const authenticateJWT = (req, res, next) => {
     }
 }
   // logga in dig här efter du gjort en användare, done 
-    app.post('/api/auth', function(req, res){
+    app.post('/api/auth',  function(req, res){
         const user_input = {
             email: req.body.email,
             password: req.body.password,
@@ -60,6 +59,7 @@ const authenticateJWT = (req, res, next) => {
             
         });
     });
+  
     // registrerar en användare ,done 
     app.get('/api/register', function(req, res) {
         console.log(req.body);
@@ -69,30 +69,27 @@ const authenticateJWT = (req, res, next) => {
             name: req.body.name,
             role: "admin"
         }
-        db.find({ "email": newUser.email}, function (err,docs){
+          db.find({ "email": newUser.email}, function (err,docs){
             if(docs.length > 0){
                 res.status(400).send({ response: "User already exists!" });
             }else{
-                db.insert(newUser)
+                  db.insert(newUser)
                 res.json({ response: "User has been registered!" });
             }
         })
-    });
-    
-    // delete a user
-    app.delete("/user", (req, res) => {
-        console.log(req.body._id);
-        user.remove({ _id: req.body._id}, {}, function (err,user) {
-            if(user > 0){
-                return res.json("user has now been deleted.");
-            }
-        });
-    });
-
+    }); 
+   
 /* Books */
-
     app.get('/api/books', function(req,res){
-        //lägg till if sats om admin visa alla annars bara användaren
+         //lägg till if sats om admin visa alla annars bara användaren
+
+        if(docs.length > 0){
+            res.status(400).send({ respons: "book already exists!" });
+        }else{
+            books.insert(newBooks)
+            res.json({ respons: "Book not found!" });
+        }
+    
         books.find({}, function (err, docs) {
             res.json(docs);
         });
@@ -131,7 +128,6 @@ const authenticateJWT = (req, res, next) => {
             }
         });
     });
-
 
 // startar servern
 app.listen(8090, () => {
