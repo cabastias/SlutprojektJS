@@ -81,7 +81,7 @@ const authenticateJWT = (req, res, next) => {
    
 /* Books */
     app.get('/api/books', function(req,res){
-         //lägg till if sats om admin visa alla annars bara användaren
+         //lägg till if sats om admin visar alla annars bara användaren
 
         if(docs.length > 0){
             res.status(400).send({ respons: "book already exists!" });
