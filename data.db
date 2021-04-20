@@ -1,0 +1,5 @@
+{"email":"cass@test.se","password":"$2b$10$0hwxxSXThzRIVnMH3gLXcu28mQn3LnEoI7GjCnSF0CoVciu1qg13a","name":"Cass","role":"admin","_id":"3AcUfOULyP9cxqV0"}
+{"email":"ankan@test.se","password":"$2b$10$IEMygJLHkU8ZzwN4OUZzRuqGixbxgKy6Fpq1QMoRoHtuTbAJzb4/e","name":"ab","role":"admin","_id":"QboKgSsrSPzPKz8o"}
+{"email":"nicke.N@test.se","password":"$2b$10$VvmFJL2137TFbdXcfXnL3.bZXv3bR8txgyhzC9iUMu7QWnbbrGrUy","name":"Nicke Nyfiken","role":"admin","_id":"St6LUeylbV8yaiDD"}
+{"email":"cassandra.b@test.se","password":"$2b$10$TNDtgbCW4Po.oVxKPqStg.GuehNSs2QtT2iIbXMtvHZhgtH.n7C3u","name":"Cassandra","role":"admin","_id":"U3KNDXqJc4ygjAky"}
+{"email":"CH.B@test.se","password":"$2b$10$0hwxxSXThzRIVnMH3gLXcuKIlYxofSsuMYJCa71v7j1xtRIygamr2","name":"CH","role":"admin","_id":"yzqfdtZDvz6W3XTi"}

@@ -33,6 +33,13 @@ const authenticateJWT = (req, res, next) => {
         res.sendStatus(401);
     }
 }
+  // get for login 
+app.get('/api/auth', function(req, res){
+return response.render('login.html');
+
+});
+
+
   // logga in dig här efter du gjort en användare, done 
     app.post('/api/auth',  function(req, res){
         const user_input = {
@@ -59,7 +66,7 @@ const authenticateJWT = (req, res, next) => {
             
         });
     });
-  
+
     // registrerar en användare ,done 
     app.get('/api/register', function(req, res) {
         console.log(req.body);
@@ -79,10 +86,10 @@ const authenticateJWT = (req, res, next) => {
         })
     }); 
    
+
 /* Books */
     app.get('/api/books', function(req,res){
          //lägg till if sats om admin visar alla annars bara användaren
-
         if(docs.length > 0){
             res.status(400).send({ respons: "book already exists!" });
         }else{
