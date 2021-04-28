@@ -35,7 +35,7 @@ const authenticateJWT = (req, res, next) => {
 }
         // get for login 
         app.get('/api/auth', function(req, res){
-        return response.render('index.html');
+        return response.render('login.html');
 
         });
 
