@@ -33,11 +33,11 @@ const authenticateJWT = (req, res, next) => {
         res.sendStatus(401);
     }
 }
-  // get for login 
-app.get('/api/auth', function(req, res){
-return response.render('login.html');
+        // get for login 
+        app.get('/api/auth', function(req, res){
+        return response.render('index.html');
 
-});
+        });
 
 
   // logga in dig här efter du gjort en användare, done 
@@ -89,7 +89,6 @@ return response.render('login.html');
 
 /* Books */
     app.get('/api/books', function(req,res){
-         //lägg till if sats om admin visar alla annars bara användaren
         if(docs.length > 0){
             res.status(400).send({ respons: "book already exists!" });
         }else{
@@ -135,7 +134,6 @@ return response.render('login.html');
             }
         });
     });
-// leaving this one behind soon, soon ready
 // startar servern
 app.listen(8090, () => {
     console.log("Server running on port 8090")
